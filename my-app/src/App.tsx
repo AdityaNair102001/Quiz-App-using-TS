@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import "./App.css";
 import { quiz } from "./data";
 import { Mode } from "./types/quiz.types";
@@ -6,6 +6,7 @@ import Switch from "@mui/material/Switch";
 import { initialState } from "./utils/initialState";
 import { reducerFunc } from "./utils/reducerFunc";
 import { optionHandler } from "./utils/optionHandler";
+import { context } from "./ContextProvider";
 
 function App() {
   const [state, dispatch] = useReducer(reducerFunc, initialState);
@@ -14,20 +15,7 @@ function App() {
 
   const [answerSelected, setAnswerSelected] = useState(false);
 
-  const [theme, setTheme] = useState<Mode>({ mode: "LIGHT" });
-
-  const modeStyle =
-    theme.mode === "DARK"
-      ? {
-          backgroundColor: "black",
-          borderColor: "white",
-          textColor: "white",
-        }
-      : {
-          backgroundColor: "white",
-          borderColor: "black",
-          textColor: "black",
-        };
+  const contextValues = useContext(context);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -40,48 +28,62 @@ function App() {
   }, [state.timer]);
 
   return (
-    <div style={{ backgroundColor: modeStyle.backgroundColor }} className="App">
+    <div
+      style={{ backgroundColor: contextValues?.modeStyle.backgroundColor }}
+      className="App"
+    >
       <div style={{ textAlign: "right" }}>
         <Switch
           size="medium"
           style={{ backgroundColor: "black" }}
           onChange={() => {
-            theme.mode === "LIGHT"
-              ? setTheme({ mode: "DARK" })
-              : setTheme({ mode: "LIGHT" });
+            contextValues?.theme.mode === "LIGHT"
+              ? contextValues?.setTheme({ mode: "DARK" })
+              : contextValues?.setTheme({ mode: "LIGHT" });
           }}
         />
       </div>
 
-      <h1 style={{ color: modeStyle.textColor }}>Quiz App 🔥</h1>
-      <h3 style={{ marginLeft: "0rem", color: modeStyle.textColor }}>
+      <h1 style={{ color: contextValues?.modeStyle.textColor }}>Quiz App 🔥</h1>
+      <h3
+        style={{
+          marginLeft: "0rem",
+          color: contextValues?.modeStyle.textColor,
+        }}
+      >
         Welcome, Aditya
       </h3>
+
       <div
         style={{
           fontSize: "1.2rem",
-
           display: "flex",
           justifyContent: "space-between",
           width: "50%",
           margin: "auto",
         }}
       >
-        <div style={{ color: modeStyle.textColor }}>
+        <div style={{ color: contextValues?.modeStyle.textColor }}>
           Question no: {state.questionNo}
         </div>
-        <div style={{ fontWeight: "bold", color: modeStyle.textColor }}>
+        <div
+          style={{
+            fontWeight: "bold",
+            color: contextValues?.modeStyle.textColor,
+          }}
+        >
           Score: {state.points}
         </div>
       </div>
       <div
         style={{
           fontSize: "1.8rem",
+          fontFamily: "'Slabo 27px', serif",
           border: "1px grey solid",
           width: "50%",
           margin: "1rem auto",
           padding: "0.8rem",
-          color: modeStyle.textColor,
+          color: contextValues?.modeStyle.textColor,
         }}
       >
         {questions[state.questionNo - 1].question}
@@ -119,7 +121,7 @@ function App() {
       <h3
         style={
           state.timer > 5
-            ? { fontSize: "3rem", color: modeStyle.textColor }
+            ? { fontSize: "3rem", color: contextValues?.modeStyle.textColor }
             : { color: "red", fontSize: "3rem" }
         }
       >
