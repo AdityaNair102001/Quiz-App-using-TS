@@ -13,6 +13,9 @@ import Options from "./Components/Options";
 import Timer from "./Components/Timer";
 import MySwitch from "./Components/MySwitch";
 import { Button } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
+import Main from "./Main";
+import Start from "./Start";
 
 function App() {
   const contextValues = useContext(context);
@@ -34,35 +37,10 @@ function App() {
       style={{ backgroundColor: contextValues?.modeStyle.backgroundColor }}
       className="App"
     >
-      {state.quizRunning === false ? (
-        <div>
-          <MySwitch></MySwitch>
-          <h1 style={{ color: contextValues?.modeStyle.textColor }}>
-            Quiz Ended
-          </h1>
-          <h2 style={{ color: contextValues?.modeStyle.textColor }}>
-            Score: {state.points}
-          </h2>
-
-          <Button
-            onClick={() => {
-              dispatch({ action: "RESTART" });
-            }}
-            variant="contained"
-          >
-            Restart
-          </Button>
-        </div>
-      ) : (
-        <div>
-          {" "}
-          <MySwitch></MySwitch>
-          <Header></Header>
-          <Question state={state}></Question>
-          <Options state={state} dispatch={dispatch}></Options>
-          <Timer state={state} dispatch={dispatch}></Timer>
-        </div>
-      )}
+      <Routes>
+        <Route path="/" element={<Start></Start>} />
+        <Route path="/main" element={<Main></Main>}></Route>
+      </Routes>
     </div>
   );
 }
