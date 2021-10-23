@@ -20,6 +20,7 @@ export function reducerFunc(
               ...state,
               questionNo: state.questionNo + 1,
               points: (state.points += 1),
+              timer: 15,
             }
         : {
             ...state,
@@ -41,6 +42,7 @@ export function reducerFunc(
               ...state,
               questionNo: state.questionNo + 1,
               points: (state.points -= 1),
+              timer: 15,
             }
         : {
             ...state,
@@ -60,7 +62,14 @@ export function reducerFunc(
       return state.timer > 0
         ? { ...state, timer: state.timer - 1 }
         : state.questionNo <= 3
-        ? { ...state, timer: 15, questionNo: state.questionNo + 1 }
+        ? state.questionNo === 3
+          ? {
+              ...state,
+              questionNo: state.questionNo,
+              timer: 15,
+              quizRunning: false,
+            }
+          : { ...state, timer: 15, questionNo: state.questionNo + 1 }
         : {
             ...state,
             timer: 0,
