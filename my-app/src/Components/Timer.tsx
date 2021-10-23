@@ -12,7 +12,7 @@ export default function Timer(props: {
   useEffect(() => {
     const id = setInterval(() => {
       props.dispatch({ action: "TIMER" });
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearInterval(id);

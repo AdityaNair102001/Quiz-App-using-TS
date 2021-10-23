@@ -30,6 +30,10 @@ export default function Main() {
               dispatch({ action: "RESTART" });
             }}
             variant="contained"
+            style={{
+              backgroundColor: contextValues?.modeStyle.elementBackgroundColor,
+              color: contextValues?.modeStyle.elementTextColor,
+            }}
           >
             Restart
           </Button>

@@ -33,6 +33,8 @@ export type ModeStyle = {
   backgroundColor: string;
   borderColor: string;
   textColor: string;
+  elementBackgroundColor: string;
+  elementTextColor: string;
 };
 
 export type InitialState = {
