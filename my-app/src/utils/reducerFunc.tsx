@@ -7,26 +7,65 @@ export function reducerFunc(
 ) {
   switch (action) {
     case "INC":
-      return state.questionNo < 3
-        ? {
+      return state.questionNo <= 3
+        ? state.questionNo === 3
+          ? {
+              ...state,
+              questionNo: state.questionNo,
+              points: (state.points += 1),
+              quizRunning: false,
+              timer: 0,
+            }
+          : {
+              ...state,
+              questionNo: state.questionNo + 1,
+              points: (state.points += 1),
+            }
+        : {
             ...state,
-            questionNo: state.questionNo + 1,
-            points: (state.points += 1),
-          }
-        : { ...state, timer: 0, questionNo: state.questionNo };
+            timer: 0,
+            questionNo: state.questionNo,
+            quizRunning: false,
+          };
     case "DEC":
+      return state.questionNo <= 3
+        ? state.questionNo === 3
+          ? {
+              ...state,
+              questionNo: state.questionNo,
+              points: (state.points -= 1),
+              quizRunning: false,
+              timer: 0,
+            }
+          : {
+              ...state,
+              questionNo: state.questionNo + 1,
+              points: (state.points -= 1),
+            }
+        : {
+            ...state,
+            timer: 0,
+            questionNo: state.questionNo,
+            quizRunning: false,
+          };
+    case "RESTART":
       return {
         ...state,
-        questionNo: state.questionNo + 1,
-        points: (state.points -= 1),
+        questionNo: 1,
+        points: 0,
+        quizRunning: true,
+        timer: 15,
       };
-    case "RESTART":
-      return { ...state, questionNo: 1, points: 0 };
     case "TIMER":
       return state.timer > 0
         ? { ...state, timer: state.timer - 1 }
-        : state.questionNo < 3
+        : state.questionNo <= 3
         ? { ...state, timer: 15, questionNo: state.questionNo + 1 }
-        : { ...state, timer: 0, questionNo: state.questionNo };
+        : {
+            ...state,
+            timer: 0,
+            questionNo: state.questionNo,
+            quizRunning: false,
+          };
   }
 }

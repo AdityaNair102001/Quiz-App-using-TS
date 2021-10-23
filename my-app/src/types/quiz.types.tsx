@@ -1,3 +1,5 @@
+import React, { ReactNode } from "react";
+
 export type Quiz = {
   title: string;
   questions: Question[];
@@ -21,4 +23,27 @@ export type actiontype = {
 
 export type Mode = {
   mode: "LIGHT" | "DARK";
+};
+
+export type Children = {
+  children: ReactNode;
+};
+
+export type ModeStyle = {
+  backgroundColor: string;
+  borderColor: string;
+  textColor: string;
+};
+
+export type InitialState = {
+  questionNo: number;
+  points: number;
+  timer: number;
+  quizRunning: boolean;
+};
+
+export type Context = {
+  theme: Mode;
+  setTheme: React.Dispatch<React.SetStateAction<Mode>>;
+  modeStyle: ModeStyle;
 };
