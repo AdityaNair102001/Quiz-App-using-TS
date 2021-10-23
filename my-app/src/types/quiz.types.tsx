@@ -35,6 +35,13 @@ export type ModeStyle = {
   textColor: string;
 };
 
+export type InitialState = {
+  questionNo: number;
+  points: number;
+  timer: number;
+  quizRunning: boolean;
+};
+
 export type Context = {
   theme: Mode;
   setTheme: React.Dispatch<React.SetStateAction<Mode>>;

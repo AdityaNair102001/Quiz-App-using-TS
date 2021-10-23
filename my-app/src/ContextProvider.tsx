@@ -1,7 +1,9 @@
 import React from "react";
 import { createContext } from "react";
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import { Mode, Context } from "./types/quiz.types";
+import { reducerFunc } from "./utils/reducerFunc";
+import { initialState } from "./utils/initialState";
 
 import { Children } from "./types/quiz.types";
 
