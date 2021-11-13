@@ -7,7 +7,7 @@ export default function MySwitch() {
   return (
     <div>
       {" "}
-      <div style={{ textAlign: "right" }}>
+      <div style={{ textAlign: "right", position: "fixed", right: "2rem" }}>
         <Switch
           size="medium"
           style={{ backgroundColor: "black" }}
