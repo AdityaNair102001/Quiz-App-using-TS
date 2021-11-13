@@ -20,6 +20,7 @@ export default function ContextProvider({ children }: Children) {
           textColor: "white",
           elementBackgroundColor: "white",
           elementTextColor: "black",
+          placeholderColor: "#1976d2",
         }
       : {
           backgroundColor: "white",
@@ -27,6 +28,7 @@ export default function ContextProvider({ children }: Children) {
           textColor: "black",
           elementBackgroundColor: "black",
           elementTextColor: "white",
+          placeholderColor: "black",
         };
 
   return (

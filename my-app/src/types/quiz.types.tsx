@@ -35,6 +35,7 @@ export type ModeStyle = {
   textColor: string;
   elementBackgroundColor: string;
   elementTextColor: string;
+  placeholderColor: string;
 };
 
 export type InitialState = {

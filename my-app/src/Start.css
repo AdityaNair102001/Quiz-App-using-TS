@@ -1,0 +1,26 @@
+.landing-page-logo {
+  width: 80%;
+  height: 100%;
+}
+
+.input-holder {
+  width: 60%;
+  margin: 0.5rem auto;
+}
+
+@media (min-width: 1025px) {
+  .landing-page-logo {
+    width: 30%;
+    height: 30%;
+  }
+
+  .input-holder {
+    width: 30%;
+    margin: 0.5rem auto;
+  }
+}
+
+/* img {
+  width: 100px;
+  height: 100px;
+} */
