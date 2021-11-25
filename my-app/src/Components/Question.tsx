@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { context } from "../ContextProvider";
-import { quiz } from "../data";
-import { InitialState } from "../types/quiz.types";
+import { Category, InitialState } from "../types/quiz.types";
 
-export default function Question(props: { state: InitialState }) {
+export default function QuestionComponent(props: {
+  state: InitialState;
+  questionsObj: Category;
+}) {
   const contextValues = useContext(context);
-  const questions = quiz.questions;
+  const questions = props.questionsObj.questions;
 
   return (
     <div>

@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { context } from "../ContextProvider";
 
-export default function Header() {
+export default function Header(props: { name: string }) {
   const contextValues = useContext(context);
+
   return (
     <div>
       {" "}
@@ -13,7 +14,7 @@ export default function Header() {
           color: contextValues?.modeStyle.textColor,
         }}
       >
-        Welcome, Aditya
+        Welcome, {props.name}
       </h3>
     </div>
   );

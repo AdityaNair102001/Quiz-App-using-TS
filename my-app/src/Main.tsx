@@ -1,19 +1,41 @@
-import { useReducer, useContext } from "react";
+import { useReducer, useContext, useEffect } from "react";
 import { reducerFunc } from "./utils/reducerFunc";
 import { initialState } from "./utils/initialState";
 import { context } from "./ContextProvider";
 import MySwitch from "./Components/MySwitch";
 import { Button } from "@mui/material";
 import Header from "./Components/Header";
-import Question from "./Components/Question";
 import Options from "./Components/Options";
 import Timer from "./Components/Timer";
+import { useLocation } from "react-router";
+import { Categories, Username } from "./types/quiz.types";
+import { quiz } from "./data";
+import QuestionComponent from "./Components/Question";
 
 export default function Main() {
   const [state, dispatch] = useReducer(reducerFunc, initialState);
   const contextValues = useContext(context);
+  const location = useLocation();
+
+  const userObject = location.state as Username;
+
+  const selectedCategory = userObject.category;
+
+  const selectedCategoryObj =
+    quiz.categories[selectedCategory as keyof Categories];
+
+  console.log(userObject.name);
+
   return (
-    <div>
+    <div
+      style={{
+        position: "fixed",
+        left: "0",
+        right: "0",
+        top: "0",
+        bottom: "0",
+      }}
+    >
       {" "}
       {state.quizRunning === false ? (
         <div>
@@ -42,9 +64,16 @@ export default function Main() {
         <div>
           {" "}
           <MySwitch></MySwitch>
-          <Header></Header>
-          <Question state={state}></Question>
-          <Options state={state} dispatch={dispatch}></Options>
+          <Header name={userObject.name}></Header>
+          <QuestionComponent
+            state={state}
+            questionsObj={selectedCategoryObj}
+          ></QuestionComponent>
+          <Options
+            state={state}
+            dispatch={dispatch}
+            questionsObj={selectedCategoryObj}
+          ></Options>
           <Timer state={state} dispatch={dispatch}></Timer>
         </div>
       )}

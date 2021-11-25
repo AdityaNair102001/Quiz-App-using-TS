@@ -2,6 +2,16 @@ import React, { ReactNode } from "react";
 
 export type Quiz = {
   title: string;
+  categories: Categories;
+};
+
+export type Categories = {
+  Football: Category;
+  Javascript: Category;
+  HarryPotter: Category;
+};
+
+export type Category = {
   questions: Question[];
 };
 
@@ -49,4 +59,9 @@ export type Context = {
   theme: Mode;
   setTheme: React.Dispatch<React.SetStateAction<Mode>>;
   modeStyle: ModeStyle;
+};
+
+export type Username = {
+  name: string;
+  category: "football" | "javascript" | "harrypotter";
 };

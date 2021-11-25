@@ -1,5 +1,5 @@
 import MySwitch from "./Components/MySwitch";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { context } from "./ContextProvider";
 import landingPageLogo from "./assets/landingPageLogo.svg";
 import {
@@ -12,8 +12,20 @@ import {
   Input,
 } from "@mui/material";
 import "./Start.css";
+import { useNavigate } from "react-router";
 export default function Start() {
   const contextValues = useContext(context);
+
+  const [category, setCategory] = useState<string>("");
+
+  const [name, setName] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  function loadQuiz() {
+    console.log(name);
+    navigate("/main", { state: { name: name, category: category } });
+  }
 
   return (
     <div
@@ -39,6 +51,7 @@ export default function Start() {
       <h2 style={{ color: contextValues?.modeStyle.textColor }}>
         Challenge yourself in the following categories ;)
       </h2>
+
       <div className="input-holder">
         <FormControl
           variant="standard"
@@ -60,10 +73,13 @@ export default function Start() {
               color: contextValues?.modeStyle.textColor,
             }}
             type="text"
-            onChange={(event) => {}}
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
           />
         </FormControl>
       </div>
+
       <FormControl component="fieldset">
         <FormLabel component="legend" sx={{ color: "#1976d2" }}>
           Genre
@@ -72,6 +88,9 @@ export default function Start() {
           row={false}
           aria-label="gender"
           name="row-radio-buttons-group"
+          onChange={(event) => {
+            setCategory(event.target.value);
+          }}
         >
           <FormControlLabel
             sx={{ color: contextValues?.modeStyle.textColor }}
@@ -106,7 +125,7 @@ export default function Start() {
 
           <FormControlLabel
             sx={{ color: contextValues?.modeStyle.textColor }}
-            value="Harry Potter"
+            value="HarryPotter"
             control={
               <Radio
                 sx={{
@@ -121,6 +140,7 @@ export default function Start() {
           />
         </RadioGroup>
       </FormControl>
+
       <div>
         <button
           style={{
@@ -129,6 +149,9 @@ export default function Start() {
             backgroundColor: "transparent",
             color: contextValues?.modeStyle.textColor,
             borderColor: contextValues?.modeStyle.borderColor,
+          }}
+          onClick={() => {
+            loadQuiz();
           }}
         >
           Play
