@@ -10,9 +10,11 @@ import {
   Radio,
   InputLabel,
   Input,
+  FormHelperText,
 } from "@mui/material";
 import "./Start.css";
 import { useNavigate } from "react-router";
+import validate from "./utils/validate";
 export default function Start() {
   const contextValues = useContext(context);
 
@@ -20,11 +22,17 @@ export default function Start() {
 
   const [name, setName] = useState<string>("");
 
+  const [inputError, setInputError] = useState<boolean>(false);
+
+  const [helperText, setHelperText] = useState<string>("");
+
   const navigate = useNavigate();
 
   function loadQuiz() {
     console.log(name);
-    navigate("/main", { state: { name: name, category: category } });
+    if (validate(name, category, setInputError, setHelperText) === true) {
+      navigate("/main", { state: { name: name, category: category } });
+    }
   }
 
   return (
@@ -58,6 +66,7 @@ export default function Start() {
           fullWidth={true}
           required
           margin="normal"
+          error={inputError}
         >
           <InputLabel
             htmlFor="component-simple"
@@ -80,7 +89,7 @@ export default function Start() {
         </FormControl>
       </div>
 
-      <FormControl component="fieldset">
+      <FormControl error={inputError} component="fieldset">
         <FormLabel component="legend" sx={{ color: "#1976d2" }}>
           Genre
         </FormLabel>
@@ -91,6 +100,7 @@ export default function Start() {
           onChange={(event) => {
             setCategory(event.target.value);
           }}
+          sx={{ alignItems: "center" }}
         >
           <FormControlLabel
             sx={{ color: contextValues?.modeStyle.textColor }}
@@ -139,6 +149,7 @@ export default function Start() {
             label="Harry Potter"
           />
         </RadioGroup>
+        <FormHelperText>{helperText}</FormHelperText>
       </FormControl>
 
       <div>

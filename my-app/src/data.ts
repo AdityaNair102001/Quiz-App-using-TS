@@ -43,34 +43,35 @@ export const quiz: Quiz = {
     Javascript: {
       questions: [
         {
-          question: "What is Asynchronous function?",
+          question:
+            "Node js is a single threaded application but supports concurrency.",
           points: 5,
           options: [
-            { text: "Teri maa ki chut", isRight: true },
-            { text: "Async execution of a block of code", isRight: false },
-            { text: "Promise resolution", isRight: false },
-            { text: "idk man", isRight: false },
+            { text: "true", isRight: true },
+            { text: "false", isRight: false },
           ],
           negativePoints: 2,
         },
         {
-          question: "What are promises",
+          question:
+            "In which of the following areas, Node.js is not advised to be used?",
           points: 5,
           options: [
-            { text: "Attacking Football", isRight: false },
-            { text: "Tiki-Taka", isRight: true },
-            { text: "Possession Football", isRight: false },
-            { text: "Defensive Football", isRight: false },
+            { text: "Single Page Applications", isRight: false },
+            { text: "JSON API based Applications", isRight: false },
+            { text: "CPU Intensive Applications", isRight: true },
+            { text: "Data Intensive Realtime Applications", isRight: false },
           ],
         },
         {
-          question: "Explain useFFect",
+          question:
+            "Which of the following command will show all the modules installed global",
           points: 5,
           options: [
-            { text: "2010", isRight: false },
-            { text: "2015", isRight: false },
-            { text: "2009", isRight: true },
-            { text: "2006", isRight: false },
+            { text: "$npm ls -g", isRight: false },
+            { text: "$npm ls", isRight: false },
+            { text: "$npx ls", isRight: true },
+            { text: "$npx ls -g", isRight: false },
           ],
           negativePoints: 2,
         },
@@ -84,8 +85,8 @@ export const quiz: Quiz = {
           options: [
             { text: "Tim Cook", isRight: true },
             { text: "Tom Marvolo Riddle", isRight: false },
-            { text: "Krishnakant Jha", isRight: false },
-            { text: "Aditya Potter", isRight: false },
+            { text: "Volto", isRight: false },
+            { text: "4th wrong option", isRight: false },
           ],
           negativePoints: 2,
         },
@@ -103,8 +104,8 @@ export const quiz: Quiz = {
           options: [
             { text: "Mystical fire bird", isRight: false },
             { text: "blue bird", isRight: false },
-            { text: "Aditya duh", isRight: true },
-            { text: "Angry Prem Singh", isRight: false },
+            { text: "A person who throws fire", isRight: true },
+            { text: "An angry red bird", isRight: false },
           ],
           negativePoints: 2,
         },
